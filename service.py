@@ -5,6 +5,7 @@ import os
 from warrens import gen_text
 from helpers import InterpretedArgsIterable
 from pathitem import find
+from man import manpage
 
 public_methods = set()
 secret_methods = set()
@@ -51,6 +52,10 @@ def cv() -> Result:
 def ls() -> Result:
     ret = ", ".join(func.__name__ for func in public_methods)
     return Success(ret)
+
+@public_method
+def man(*args) -> Result:
+    return Success("\n\n".join(manpage[arg] for arg in args))
 
 @public_method
 def website_info() -> Result:

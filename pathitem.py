@@ -1,6 +1,7 @@
 import csv
 from helpers import InterpretedArgsIterable
 from typing import Callable, Dict, List
+from man import manpage
 
 def process_data(data: Dict):
     data["PFS"] = data["PFS"] == "True"
