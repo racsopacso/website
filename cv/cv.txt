@@ -1,0 +1,40 @@
+Details:
+|      Name | Oscar Katz
+|     Email | ogkatz@gmail.com
+| Telephone | 07932 635500
+|    Degree | First-class Physics MPhys at University of St. Andrews, graduated 2022
+
+Work History:
+|  Jan 2023 - Current: | Python Software Developer at Playtech (Algos Team)
+|          Summer 2022 | Project Manager at InsideUni
+|          Summer 2020 | Python Software Developer at Moorcrofts LLP
+|  Summers 2017 & 2019 | Python Developer Intern at Photon Design
+
+Tech Stack:
+|                Python | 7 years
+|  - FastAPI & Pydantic | 1 year
+|              - Django | 1 year
+|              - Cython | 1 year
+|                   SQL | 2 years
+|                     C | 2 years
+|              RabbitMQ | 1 year
+|           Mathematica | 4 years
+|                  Bash | 1 year
+
+Notable Projects:
+Evil Bit Messaging Protocol:
+Using an unused bit in the IPv4 header, I was able to implement a linux kernel module to send information piggybacking on existing packets.
+
+Cursed Mastermind: 
+Algorithm that plays Mastermind against the player, cheating (undetectably) to maximise the length of time it takes for them to win.
+
+Desktop Background Generator: 
+Program that automatically generates desktop backgrounds on boot by combining images from a pool. 
+
+Sliding DFT filter: 
+Part of my Masters project. Generic frequency filter implemented on a development board in C. Uses an algorithm that can be faster than the standard FFT in the low-latency case.
+
+Spectogram:
+Part of my Masters project. Visually displays the frequency-domain representation of a signal. Computationally efficient enough that maximum detectable frequency is limited by board I/O rather than processing time. 
+
+
