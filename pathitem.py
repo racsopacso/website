@@ -31,7 +31,7 @@ def price(args: List[str]) -> Callable[[Dict[str, str]], bool]:
             return float(val[:-1]) * 1000
         else:
             return float(val)
-    
+
     def price_individual_condition(condition: str) -> Callable[[float], bool]:
         try:
             func = map[condition[0]]
@@ -46,7 +46,7 @@ def price(args: List[str]) -> Callable[[Dict[str, str]], bool]:
         return lambda x: func(x, val)
 
     funclist = [price_individual_condition(condition) for condition in args]
-    
+
     return lambda x: all(func(float_and_k(x["PRICE"])) for func in funclist)
 
 def text_search(args: List[str]):
@@ -60,12 +60,12 @@ def text_search(args: List[str]):
         def handle_middle(name: str):
             if not middle:
                 return True
-            
+
             indices = [name.find(elem) for elem in middle]
 
             if any(index == -1 for index in indices):
                 return False
-            
+
             iterator = iter(indices)
 
             next(iterator)
@@ -83,7 +83,7 @@ def text_search(args: List[str]):
 def name(args: List[str]) -> Callable[[Dict[str, str]], bool]:
     funclist = text_search(args)
     return lambda x: all(func(x["NAME"].lower()) for func in funclist)
-    
+
 @arg
 def description(args: List[str]) -> Callable[[Dict[str, str]], bool]:
     funclist = text_search(args)
@@ -94,11 +94,16 @@ def slot(args: List[str]) -> Callable[[Dict[str, str]], bool]:
     funclist = text_search(args)
     return lambda x: all(func(x["SLOT"].lower()) for func in funclist)
 
-@arg 
+@arg
 def tag(args) -> Callable[[Dict[str, str]], bool]:
     funclist = text_search(args)
     return lambda x: all(any(func(tag.lower()) for tag in x["TAGS"].split(", ")) for func in funclist)
-    
+
+@arg
+def pfs(args: List[str]) -> Callable[[Dict[str, str]], bool]:
+    funclist = text_search(args)
+    return lambda x: all(func(x["PFS"].lower()) for func in funclist)
+
 
 def find(int_args: InterpretedArgsIterable):
     conditions = [argmap[key](value) for key, value in int_args]
@@ -109,4 +114,4 @@ def find(int_args: InterpretedArgsIterable):
 
     return ret
 
-    
+
