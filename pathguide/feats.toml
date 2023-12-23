@@ -1,0 +1,119 @@
+[power_attack]
+text = """
+Trades attack bonus for damage at a very good rate, extremely good if the weapon is \
+held in two hands. The main source of damage scaling for almost all melee builds in pathfinder.
+"""
+
+[two-weapon_fighting_line]
+text = """
+These feats are so tied to the fighting style that there's really not much point in having \
+a different article.
+"""
+subfeats = ["two-weapon_fighting", "improved_two-weapon_fighting", "greater_two-weapon_fighting"]
+
+[mobile_bulwark_line]
+subfeats = ["mobile_bulwark_style", "mobile_fortress", "mobile_stronghold"]
+text = """
+The first feat lets you become totally immune to non-spell attacks from one direction as a move action. \
+Probably mainly of interest to casters, who can be at range (where this ability shines) and who often have a move action spare \
+but also usable by mounted characters, who have a move action free after a mounted charge.
+
+The second feat represents a dramatic increase to Touch AC, which is of interest to anyone, and extends your \
+directional protection to allies (including potentially your mount).
+
+The third feat lets you negate an attack as an immediate action, which is extremely powerful.
+"""
+
+[mobile_bulwark_style]
+article_redirect = "mobile_bulwark_line"
+
+[mobile_fortress]
+article_redirect = "mobile_bulwark_line"
+
+[mobile_stronghold]
+article_redirect = "mobile_bulwark_line"
+
+[two-weapon_fighting]
+article_redirect = "two-weapon_fighting_line"
+
+[improved_two-weapon_fighting]
+article_redirect = "two-weapon_fighting_line"
+
+[improved_two-weapon_fighting.prereqs]
+feats = ["two-weapon_fighting"]
+
+[greater_two-weapon_fighting]
+article_redirect = "two-weapon_fighting_line"
+
+[greater_two-weapon_fighting.prereqs]
+feats = ["two-weapon_fighting", "improved_two-weapon_fighting"]
+
+[weapon_finesse]
+text = """
+Allows you to use your Dex bonus to determine accuracy (not damage) with certain melee weapons - all light \
+ weapons and some special one-and-two-handed weapons. 
+"""
+
+[starry_grace]
+text = """
+Gives you Dex to damage with starknives. 
+"""
+
+[starry_grace.prereqs] 
+feats = ["weapon_focus", "weapon_finesse"]
+
+[fencing_grace]
+text = """
+Gives you Dex to damage with rapiers. Note that rapiers cannot be used with piranha style without a \ 
+specific magic item (effortless lace), so at higher levels they actually have worse damage than a light \
+slashing weapon used with Slashing Grace.
+"""
+
+[fencing_grace.prereqs]
+feats = ["weapon_focus", "weapon_finesse"]
+
+[slashing_grace]
+text = """
+Gives you Dex to damage with any slashing weapon.
+"""
+
+[slashing_grace.prereqs]
+feats = ["weapon_focus", "weapon_finesse"]
+
+[rapid_shot]
+text = """
+Gives you an additional attack for a very low penalty. """
+
+[rapid_shot.prereqs]
+feats = ["point_blank_shot"]
+
+[precise_shot]
+text = """
+Without this feat, firing into melee (which you will be doing most of the time) has an extremely large penalty. \
+Basically mandatory for ranged characters, even potentially wanted on ray specialist mages.
+"""
+
+[precise_shot.prereqs]
+feats = ["point_blank_shot"]
+
+
+[dervish_dance]
+text = """
+Dex-to-damage with the scimitar. Fewer prereqs than most sources of Dex-to-damage. Generally works similarly to \
+the others, except it forbids shields entirely (no bucklers) as well as off-hand weapons. Allows the other hand to \
+be used in other ways, though - works with flurry, spell combat, etc.
+"""
+
+[dervish_dance.prereqs]
+feats = ["weapon_finesse"]
+
+[difficult_swings]
+text = """
+When you take a full attack, squares near you become difficult terrain. Difficult terrain is harder to move into, not \
+out of, so this doesn't stop people from escaping like you might think. However, if you have access to reach (from a reach \
+weapon or Lunge) it greatly inconveniences medium melee enemies, as they cannot 5-foot step in to full attack you after \
+you full attack them. 
+"""
+
+[difficult_swings.prereqs]
+feats = ["martial_focus"]
