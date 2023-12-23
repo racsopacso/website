@@ -11,7 +11,7 @@ from pathguide import omnimap, Required
 from itertools import zip_longest, chain
 
 config = Config()
-config.bind = ['0.0.0.0:8000']
+config.bind = ['0.0.0.0:2033']
 config.access_log_format = '%(R)s %(s)s %(st)s %(D)s %({Header}o)s'
 config.accesslog = logging.getLogger(__name__)
 config.loglevel = 'INFO'
