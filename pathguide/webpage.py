@@ -9,16 +9,20 @@ import logging
 import typing as t
 from pathguide import omnimap, Required
 from itertools import zip_longest, chain
+from config import ROOT_DIR
 
 config = Config()
-config.bind = ['0.0.0.0:2033']
+config.bind = ['127.0.0.1:2345']
 config.access_log_format = '%(R)s %(s)s %(st)s %(D)s %({Header}o)s'
 config.accesslog = logging.getLogger(__name__)
 config.loglevel = 'INFO'
+#config.root_path = "/pathguide/"
+#config.keyfile = "funkydiagrams.com_private_key.key"
+#config.certfile = "funkydiagrams.com_ssl_certificate.cer"
 
 app = FastAPI()
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount(ROOT_DIR+"static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="templates")
 
@@ -80,7 +84,7 @@ def get_provides(classes):
     return cls
         
 
-@app.get("/select/{page_name}", response_class=HTMLResponse)
+@app.get(ROOT_DIR + "select/{page_name}", response_class=HTMLResponse)
 async def select(request: Request, page_name: str, cookie_adj: t.Optional[str] = None):
     print("wow")
     if cookie_adj:
@@ -103,7 +107,8 @@ async def select(request: Request, page_name: str, cookie_adj: t.Optional[str] =
                                        "included_classes": included_classes,
                                        "name": page_name,
                                        "to_render": to_render, 
-                                       "provides": provides})
+                                       "provides": provides,
+                                       "ROOT_DIR": ROOT_DIR})
     
     if cookie_adj:
         print(cookiekey, cookieval)
@@ -111,8 +116,9 @@ async def select(request: Request, page_name: str, cookie_adj: t.Optional[str] =
 
     return resp
 
-@app.get("/{page_type}/{page_name}", response_class=HTMLResponse)
+@app.get(ROOT_DIR + "{page_type}/{page_name}", response_class=HTMLResponse)
 async def read_item(request: Request, page_type: str, page_name: str, cookie_adj: t.Optional[str] = None):
+    print(request.scope.get("root_path"))
     bod = getattr(omnimap, page_type)[page_name]
 
     if cookie_adj:
@@ -132,14 +138,15 @@ async def read_item(request: Request, page_type: str, page_name: str, cookie_adj
                                        "included_classes": included_classes,
                                        "not_included_styles": not_included_styles,
                                        "imports": {"zip_longest": zip_longest},
-                                       "provides": provides})
+                                       "provides": provides,
+                                       "ROOT_DIR": ROOT_DIR})
     
     if cookie_adj:
         resp.set_cookie(key = cookiekey, value = cookieval)
 
     return resp
 
-@app.get("/summary", response_class=HTMLResponse)
+@app.get(ROOT_DIR + "summary", response_class=HTMLResponse)
 async def summary(request: Request, cookie_adj: t.Optional[str] = None):
     if cookie_adj:
         cookiekey, cookieval = parse_cookie_adj(cookie_adj, request.cookies)
@@ -162,13 +169,13 @@ async def summary(request: Request, cookie_adj: t.Optional[str] = None):
                                        "included_classes": included_classes, 
                                        "required_feats": required_feats,
                                        "recommended_feats": recommended_feats,
-                                       "provides": provides})
+                                       "provides": provides,
+                                       "ROOT_DIR": ROOT_DIR})
     
     if cookie_adj:
         resp.set_cookie(key = cookiekey, value = cookieval)
 
     return resp
-
 
 
 asyncio.run(serve(app, config))

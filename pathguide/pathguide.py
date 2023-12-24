@@ -5,6 +5,8 @@ import typing as t
 import itertools as it
 from functools import cached_property
 
+from config import ROOT_DIR
+
 from tomli import loads as tloads
 
 from dataclasses import dataclass
@@ -22,7 +24,7 @@ class RulesObj(BaseModel):
     
     def get_article(self) -> str:
         try:
-            return self.url_prefix + self.article_redirect if self.article_redirect else self.url_prefix + self.name
+            return ROOT_DIR + self.url_prefix + self.article_redirect if self.article_redirect else ROOT_DIR + self.url_prefix + self.name
         
         except:
             raise NotImplementedError
@@ -62,7 +64,7 @@ class Style(RulesObj):
     upsides: t.List[str] = []
     downsides: t.List[str] = []
     required: t.Optional[Required] = None
-    url_prefix: t.ClassVar[t.Optional[str]] = "/styles/"
+    url_prefix: t.ClassVar[t.Optional[str]] = "styles/"
     recommended: t.Optional[Required] = None
 
     def __repr__(self):
@@ -74,7 +76,7 @@ class Replacement(BaseModel):
 
 class Class(Style):
     provides: t.Optional[Required] = None
-    url_prefix: t.ClassVar[t.Optional[str]] = "/classes/"
+    url_prefix: t.ClassVar[t.Optional[str]] = "classes/"
 
     def __repr__(self):
         return "Class(" + ", ".join((self.name, str(self.replacements), str(self.required))) + ")"
@@ -82,7 +84,7 @@ class Class(Style):
 class Feat(RulesObj):
     subfeats: t.Optional[t.List[str]] = None
     prereqs: t.Optional[Required] = None
-    url_prefix: t.ClassVar[t.Optional[str]] = "/feats/"
+    url_prefix: t.ClassVar[t.Optional[str]] = "feats/"
     is_union: t.ClassVar[bool] = False
     is_db: t.ClassVar[bool] = True
 

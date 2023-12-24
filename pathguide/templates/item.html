@@ -3,7 +3,8 @@
 <html>
 <head>
     <title>Item Details</title>
-    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ROOT_DIR}}static/style.css" />
+
 </head>
 <div class="sidenav">
     <a class = "summary" href = "/summary">Summary</a>
@@ -13,7 +14,7 @@
     <div><span><a href = "{{class.get_article()}}">{{ class.full_name }} </a> </span> <span style = "float: right"> <a href = "?cookie_adj=rm.classes.{{class.name}}">&#10062;</a></span></div>
     {% endfor %}
     {% else %}
-    <a href = "/select/classes">Select a class </a>
+    <a href = "{{ROOT_DIR}}select/classes">Select a class </a>
     {% endif %}
 
     <nav-title>Selected styles:</nav-title>
@@ -22,7 +23,7 @@
     <div><span><a href = "{{style.get_article()}}">{{ style.full_name }} </a></span> <span style = "float: right"><a href = "?cookie_adj=rm.styles.{{style.name}}">&#10062;</a></span></div>
     {% endfor %}
     {% else %}
-    <a href = "/select/styles">Select a style </a>
+    <a href = "{{ROOT_DIR}}select/styles">Select a style </a>
     {% endif %}
     
     <nav-title>Other Styles:</nav-title>
